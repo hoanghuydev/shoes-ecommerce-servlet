@@ -16,6 +16,12 @@
     </decorator>
 
     <decorator name="login" page="login.jsp">
-        <pattern>/(sign-in|sign-up)</pattern>
+        <pattern>/sign-in*</pattern>
+    </decorator>
+    <decorator name="register" page="login.jsp">
+        <pattern>/sign-up*</pattern>
+    </decorator>
+    <decorator name="register" page="login.jsp">
+        <pattern>/vertify-email*</pattern>
     </decorator>
 </decorators>

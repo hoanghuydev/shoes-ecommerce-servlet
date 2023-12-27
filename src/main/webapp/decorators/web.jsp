@@ -16,6 +16,7 @@
     <link href="<c:url value="/template/web/css/bootstrap.min.css"/>" rel="stylesheet">
     <link href="<c:url value="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/template/web/css/tiny-slider.css"/>" rel="stylesheet">
+    <link href="<c:url value="/template/web/css/custom.css"/>" rel="stylesheet">
     <link href="<c:url value="/template/web/css/style.css"/>" rel="stylesheet">
     <title><dec:title default="Nai Shoes & Sneakers"/></title>
 </head>

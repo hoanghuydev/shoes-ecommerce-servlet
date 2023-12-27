@@ -7,7 +7,7 @@ public class UserModel extends AbstractModel<UserModel> {
     private String  email;
     private  String password;
     private  String fullName;
-    private Date birthDay;
+    private String birthDay;
     private Boolean admin;
 
 
@@ -43,11 +43,11 @@ public class UserModel extends AbstractModel<UserModel> {
         this.fullName = fullName;
     }
 
-    public Date getBirthDay() {
+    public String getBirthDay() {
         return birthDay;
     }
 
-    public void setBirthDay(Date birthDay) {
+    public void setBirthDay(String birthDay) {
         this.birthDay = birthDay;
     }
 

@@ -20,6 +20,7 @@ public class UserService implements IUserService {
 
     @Override
     public UserModel save(UserModel userModel) throws SQLException {
+        userModel.setCreateAt(new Timestamp(System.currentTimeMillis()));
         Long userId = userDAO.save(userModel);
         return userDAO.findById(userId);
     }

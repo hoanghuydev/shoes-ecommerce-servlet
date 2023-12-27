@@ -45,7 +45,7 @@ public class AbstractMapper<T> implements GenericMapper<T> {
             try {
                 Object value = field.get(model);
                 if (value != null) {
-                    if (typeSQL.toLowerCase().equals("update") && field.getName()!="id") {
+                    if ((typeSQL.toLowerCase().equals("update") || typeSQL.toLowerCase().equals("insert")) && field.getName()!="id" ) {
                         sql.append(field.getName()).append(" = ?, ");
                         params.add(value);
                     } else if (typeSQL.toLowerCase().equals("select")) {
@@ -84,9 +84,11 @@ public class AbstractMapper<T> implements GenericMapper<T> {
             String columnName = metaData.getColumnName(i);
             List<String> colVal = new ArrayList<>();
             Object values =  resultSet.getObject(columnName);
-            colVal.add(resultSet.getObject(columnName)+"");
-            String[] columnValues = colVal.toArray(new String[0]);
-            resultMap.put(columnName, columnValues);
+            if (values!=null) {
+                colVal.add(resultSet.getObject(columnName)+"");
+                String[] columnValues = colVal.toArray(new String[0]);
+                resultMap.put(columnName, columnValues);
+            }
         }
         T object = modelClass.newInstance();
         BeanUtils.populate(object,resultMap);
