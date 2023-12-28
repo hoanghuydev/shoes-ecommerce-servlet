@@ -2,9 +2,14 @@ package com.ltweb_servlet_ecommerce.utils;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.cloudinary.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class HttpUtil {
 
@@ -21,6 +26,10 @@ public class HttpUtil {
             System.out.print(e.getMessage());
         }
         return null;
+    }
+    public JSONObject toJSONObject() throws UnsupportedEncodingException {
+        JSONObject result = new JSONObject(new String(value.getBytes("ISO-8859-1"), StandardCharsets.UTF_8));
+        return result;
     }
 
     public static HttpUtil of (BufferedReader reader) {

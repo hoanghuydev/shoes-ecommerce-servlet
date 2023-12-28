@@ -22,7 +22,7 @@ public class AuthorizationFilter implements Filter {
 //        if (url.startsWith("/admin")) {
 //            UserModel user = (UserModel) SessionUtil.getInstance().getValue(req,"USERMODEL");
 //            if (user!=null) {
-//                if (user.getRoleId()== SystemConstant.ADMIN_ROLEID.longValue()) filterChain.doFilter(servletRequest,servletResponse);
+//                if (user.getRoleId()==true) filterChain.doFilter(servletRequest,servletResponse);
 //                else resp.sendRedirect(req.getContextPath()+"/dang-nhap?action=login&message=not_permission&alert=danger");
 //
 //            } else {

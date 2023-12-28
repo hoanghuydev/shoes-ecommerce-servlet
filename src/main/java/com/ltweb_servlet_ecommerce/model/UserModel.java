@@ -9,7 +9,14 @@ public class UserModel extends AbstractModel<UserModel> {
     private  String fullName;
     private String birthDay;
     private Boolean admin;
+    private String association = "none";
+    public String getAssociation() {
+        return association;
+    }
 
+    public void setAssociation(String association) {
+        this.association = association;
+    }
 
     public String getUserName() {
         return userName;
@@ -59,5 +66,16 @@ public class UserModel extends AbstractModel<UserModel> {
         this.admin = admin;
     }
 
-
+    @Override
+    public String toString() {
+        return "UserModel{" +
+                "userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", birthDay='" + birthDay + '\'' +
+                ", admin=" + admin +
+                ", association='" + association + '\'' +
+                '}';
+    }
 }

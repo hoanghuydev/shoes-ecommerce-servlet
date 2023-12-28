@@ -37,7 +37,8 @@ public class VertifyEmailController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String otp = req.getParameter("otp");
-        String otpOrigin = SessionUtil.getValue(req,"OTP")+"";
+        String otpOrigin = SessionUtil.getInstance().getValue(req,"OTP")+"";
+
         if (otp.equals(otpOrigin)) {
             UserModel userModel = (UserModel) SessionUtil.getInstance().getValue(req,"REGISTER_USER");
             BCrypt.Hasher hasher = BCrypt.withDefaults();

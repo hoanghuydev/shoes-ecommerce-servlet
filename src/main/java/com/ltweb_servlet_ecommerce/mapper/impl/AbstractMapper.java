@@ -90,6 +90,7 @@ public class AbstractMapper<T> implements GenericMapper<T> {
                 resultMap.put(columnName, columnValues);
             }
         }
+
         T object = modelClass.newInstance();
         BeanUtils.populate(object,resultMap);
         resultMap.clear();

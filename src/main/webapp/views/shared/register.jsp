@@ -78,7 +78,10 @@
                                     </button>
 
                                     <button type="button" class="btn btn-link btn-floating mx-1">
-                                        <i class="fab fa-google"></i>
+                                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20https://www.googleapis.com/auth/userinfo.profile&redirect_uri=http://localhost:8080/oauth2-google&response_type=code
+		   &client_id=618438047417-pnt76uvpvbdqm2h3a6jgriktdqv4vr4c.apps.googleusercontent.com&approval_prompt=force">
+                                            <i class="fab fa-google"></i>
+                                        </a>
                                     </button>
                                 </div>
                             </form>
@@ -90,21 +93,7 @@
     </div>
     <!-- Jumbotron -->
 </section>
-<c:if test="${not empty toast && not empty message}">
-    <script>
-        window.addEventListener("DOMContentLoaded",function (){
-            Toastify({
-                text: '${message}',
-                duration: 3000,
-                className: "bg-${toast}",
-                close: true,
-                gravity: "top", // `top` or `bottom`
-                position: "right",
-            }).showToast();
-        })
-    </script>
 
-</c:if>
 <!-- Section: Design Block -->
 </body>
 </html>

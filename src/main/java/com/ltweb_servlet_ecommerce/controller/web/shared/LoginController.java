@@ -40,45 +40,27 @@ public class LoginController extends HttpServlet {
         RequestDispatcher rd = req.getRequestDispatcher("/views/shared/login.jsp");
         rd.forward(req, resp);
     }
-
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            UserModel userModel = null;
-            try {
-                userModel = FormUtil.toModel(UserModel.class,req);
-                if (userModel.getPassword()!=null && userModel.getEmail()!=null) {
-                    UserModel tmpUser = new UserModel();
-                    tmpUser.setEmail(userModel.getEmail());
-                    tmpUser = userService.findWithFilter(tmpUser);
-                    BCrypt.Verifyer verifyer = BCrypt.verifyer();
-                    BCrypt.Result result = verifyer.verify(userModel.getPassword().toCharArray(), tmpUser.getPassword());
-                    if (tmpUser!=null && result.verified) {
-                        SessionUtil.getInstance().putValue(req,"USER_MODEL",tmpUser);
-                        if (tmpUser.getAdmin()) {
-                            resp.sendRedirect(req.getContextPath()+"/home");
-                        } else {
-                            resp.sendRedirect(req.getContextPath()+"/home");
-                        }
-                    } else {
-                        resp.sendRedirect(req.getContextPath()+"/sign-in?action=login&message=username_password_invalid&toast=danger");
-                    }
+        try {
+            UserModel userModel = FormUtil.toModel(UserModel.class, req);
+            if (userModel.getPassword() != null && userModel.getEmail() != null) {
+                UserModel tmpUser = new UserModel();
+                tmpUser.setEmail(userModel.getEmail());
+                tmpUser =userService.findWithFilter(tmpUser);
+                if (tmpUser != null && BCrypt.verifyer().verify(userModel.getPassword().toCharArray(), tmpUser.getPassword()).verified) {
+                    SessionUtil.getInstance().putValue(req, "USER_MODEL", tmpUser);
+                    resp.sendRedirect(req.getContextPath() + "/home");
                 } else {
-                    resp.sendRedirect(req.getContextPath()+"/sign-in?action=login&message=fill_all_fields&toast=danger");
-
+                    resp.sendRedirect(req.getContextPath() + "/sign-in?message=username_password_invalid&toast=danger");
                 }
-            } catch (InstantiationException e) {
-                throw new RuntimeException(e);
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
-            } catch (InvocationTargetException e) {
-                throw new RuntimeException(e);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+            } else {
+                resp.sendRedirect(req.getContextPath() + "/sign-in?message=fill_all_fields&toast=danger");
             }
-
-
-
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

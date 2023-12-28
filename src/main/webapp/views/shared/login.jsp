@@ -9,7 +9,7 @@
 <%@include file="/common/taglib.jsp" %>
 <html>
 <head>
-    <title>Nai Login</title>
+    <title>Nai - Login</title>
     <style>
         .divider:after,
         .divider:before {
@@ -43,9 +43,11 @@
                         <button type="button" class="btn btn-primary btn-floating mx-1">
                             <i class="fab fa-facebook-f"></i>
                         </button>
-
                         <button type="button" class="btn btn-primary btn-floating mx-1">
-                            <i class="fab fa-twitter"></i>
+                            <a href="https://accounts.google.com/o/oauth2/auth?client_id=618438047417-pnt76uvpvbdqm2h3a6jgriktdqv4vr4c.apps.googleusercontent.com&redirect_uri=http://localhost:8080/oauth2-google&scope=https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile&response_type=code">
+                                <i class="fab fa-google" style="color: white"></i>
+                            </a>
+
                         </button>
 
                         <button type="button" class="btn btn-primary btn-floating mx-1">
@@ -94,20 +96,5 @@
         </div>
     </div>
 </section>
-<c:if test="${not empty toast && not empty message}">
-    <script>
-        window.addEventListener("DOMContentLoaded",function (){
-            Toastify({
-                text: '${message}',
-                duration: 10000,
-                className: "bg-${toast}",
-                close: true,
-                gravity: "top", // `top` or `bottom`
-                position: "right",
-            }).showToast();
-        })
-    </script>
-
-</c:if>
 </body>
 </html>

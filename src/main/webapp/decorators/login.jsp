@@ -38,5 +38,20 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"
 ></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<c:if test="${not empty toast && not empty message}">
+    <script>
+        window.addEventListener("DOMContentLoaded",function (){
+            Toastify({
+                text: '${message}',
+                duration: 3000,
+                className: "bg-${toast}",
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "right",
+            }).showToast();
+        })
+    </script>
+
+</c:if>
 </body>
 </html>

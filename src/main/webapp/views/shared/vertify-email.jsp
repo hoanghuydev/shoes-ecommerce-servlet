@@ -53,20 +53,5 @@
     </div>
     <!-- Jumbotron -->
 </section>
-<c:if test="${not empty toast && not empty message}">
-    <script>
-        window.addEventListener("DOMContentLoaded",function (){
-            Toastify({
-                text: '${message}',
-                duration: 3000,
-                className: "bg-${toast}",
-                close: true,
-                gravity: "top", // `top` or `bottom`
-                position: "right",
-            }).showToast();
-        })
-    </script>
-
-</c:if>
 </body>
 </html>
