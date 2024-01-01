@@ -6,9 +6,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface IOrderService {
-    OrderModel findById(Long id) throws SQLException;
-    OrderModel save(OrderModel productModel) throws SQLException;
-    OrderModel update(OrderModel productModel) throws SQLException;
+    OrderModel findWithFilter(OrderModel model) throws SQLException;
+    OrderModel save(OrderModel model) throws SQLException;
     OrderModel delete(Long id) throws SQLException;
+    OrderModel update(OrderModel model) throws SQLException;
+    OrderModel findById(Long id) throws SQLException;
     List<OrderModel> findAll() throws SQLException;
 }

@@ -1,15 +1,14 @@
 package com.ltweb_servlet_ecommerce.controller.web.shared;
+
 import com.ltweb_servlet_ecommerce.model.UserModel;
 import com.ltweb_servlet_ecommerce.service.IUserService;
 import com.ltweb_servlet_ecommerce.utils.HttpUtil;
 import com.ltweb_servlet_ecommerce.utils.SessionUtil;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
 import org.cloudinary.json.JSONObject;
 
 import javax.inject.Inject;
@@ -22,8 +21,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 @WebServlet(urlPatterns = {"/oauth2-google"})
@@ -60,6 +57,8 @@ public class OAuth2GoogleController extends HttpServlet {
         userModel.setEmail(userInfoJson.getString("email"));
         userModel.setFullName(userInfoJson.getString("name"));
         userModel.setUserName(userInfoJson.getString("id"));
+        userModel.setAssociation("google");
+
         try {
             checkUserAndSignIn(request,response,userModel);
         } catch (SQLException e) {
@@ -69,11 +68,11 @@ public class OAuth2GoogleController extends HttpServlet {
     private void checkUserAndSignIn(HttpServletRequest req, HttpServletResponse resp, UserModel userModel) throws SQLException, IOException {
        UserModel tmpUser = new UserModel();
        tmpUser.setEmail(userModel.getEmail());
+       tmpUser.setAssociation(userModel.getAssociation());
        tmpUser = userService.findWithFilter(tmpUser);
        if (tmpUser==null) {
 //       If not exist user then register new user
-           userModel.setAssociation("google");
-           userService.save(userModel);
+           userModel = userService.save(userModel);
            SessionUtil.getInstance().putValue(req,"USER_MODEL",userModel);
            resp.sendRedirect(req.getContextPath()+"/home?message=welcome&toast=success");
        } else if (tmpUser!=null && tmpUser.getAssociation().equals("google")) {

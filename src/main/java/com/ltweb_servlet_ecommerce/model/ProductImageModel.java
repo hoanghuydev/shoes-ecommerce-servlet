@@ -1,8 +1,7 @@
 package com.ltweb_servlet_ecommerce.model;
 
-public class ProductImage extends AbstractModel<ProductImage>{
+public class ProductImageModel extends AbstractModel<ProductImageModel>{
     private  String imageUrl;
-
     public String getImageUrl() {
         return imageUrl;
     }

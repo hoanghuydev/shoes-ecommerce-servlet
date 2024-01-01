@@ -3,6 +3,7 @@ package com.ltweb_servlet_ecommerce.controller.web.shared;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.ltweb_servlet_ecommerce.model.UserModel;
 import com.ltweb_servlet_ecommerce.service.IUserService;
+import com.ltweb_servlet_ecommerce.utils.NotifyUtil;
 import com.ltweb_servlet_ecommerce.utils.SessionUtil;
 
 import javax.inject.Inject;
@@ -22,14 +23,7 @@ public class VertifyEmailController extends HttpServlet {
     IUserService userService;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String message = req.getParameter("message");
-        String toast = req.getParameter("toast");
-        if (message!=null && toast!=null) {
-            ResourceBundle resourceMsg = ResourceBundle.getBundle("message");
-            ResourceBundle resourceToast = ResourceBundle.getBundle("toast");
-            req.setAttribute("message",resourceMsg.getString(message));
-            req.setAttribute("toast",resourceToast.getString(toast));
-        }
+        NotifyUtil.setUp(req);
         RequestDispatcher rd = req.getRequestDispatcher("/views/shared/vertify-email.jsp");
         rd.forward(req, resp);
     }

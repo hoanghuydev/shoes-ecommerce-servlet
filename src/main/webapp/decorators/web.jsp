@@ -13,6 +13,7 @@
     <meta name="keywords" content="bootstrap, bootstrap4" />
 
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link href="<c:url value="/template/web/css/bootstrap.min.css"/>" rel="stylesheet">
     <link href="<c:url value="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/template/web/css/tiny-slider.css"/>" rel="stylesheet">
@@ -31,11 +32,10 @@
 <!-- Start Footer Section -->
 <%@ include file="/common/web/footer.jsp" %>
 <!-- End Footer Section -->
-
-
 <script src="<c:url value="/template/web/js/bootstrap.bundle.min.js"/>"></script>
 <script src="<c:url value="/template/web/js/tiny-slider.js"/>"></script>
 <script src="<c:url value="/template/web/js/custom.js"/>"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <c:if test="${not empty toast && not empty message}">
     <script>
         window.addEventListener("DOMContentLoaded",function (){

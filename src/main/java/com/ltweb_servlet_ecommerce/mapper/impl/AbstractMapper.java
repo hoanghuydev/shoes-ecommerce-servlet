@@ -77,6 +77,7 @@ public class AbstractMapper<T> implements GenericMapper<T> {
     }
 //    Map kết quả từ sql
     public T mapper(ResultSet resultSet, Class<T> modelClass) throws SQLException, InstantiationException, IllegalAccessException, InvocationTargetException {
+
         Map<String,String[]> resultMap = new HashMap<String,String[]>();
         ResultSetMetaData metaData = resultSet.getMetaData();
         int columnCount = metaData.getColumnCount();

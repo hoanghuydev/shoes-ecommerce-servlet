@@ -6,7 +6,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface ICategoryService {
-    List<CategoryModel> findAll() throws SQLException;
-    CategoryModel save(CategoryModel categoryModel) throws SQLException;
+    CategoryModel findWithFilter(CategoryModel model) throws SQLException;
+    CategoryModel save(CategoryModel model) throws SQLException;
+    CategoryModel delete(Long id) throws SQLException;
+    CategoryModel update(CategoryModel model) throws SQLException;
     CategoryModel findById(Long id) throws SQLException;
+    List<CategoryModel> findAll() throws SQLException;
 }

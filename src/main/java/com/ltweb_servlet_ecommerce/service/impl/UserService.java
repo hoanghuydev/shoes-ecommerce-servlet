@@ -14,14 +14,14 @@ public class UserService implements IUserService {
     @Inject
     IUserDAO userDAO;
     @Override
-    public UserModel findWithFilter(UserModel userModel) throws SQLException {
-        return userDAO.findWithFilter(userModel);
+    public UserModel findWithFilter(UserModel model) throws SQLException {
+        return userDAO.findWithFilter(model);
     }
 
     @Override
-    public UserModel save(UserModel userModel) throws SQLException {
-        userModel.setCreateAt(new Timestamp(System.currentTimeMillis()));
-        Long userId = userDAO.save(userModel);
+    public UserModel save(UserModel model) throws SQLException {
+        model.setCreateAt(new Timestamp(System.currentTimeMillis()));
+        Long userId = userDAO.save(model);
         return userDAO.findById(userId);
     }
 
@@ -34,12 +34,12 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserModel update(UserModel userModel) throws SQLException {
-        UserModel oldProduct = userDAO.findById(userModel.getId());
-        userModel.setCreateAt(oldProduct.getCreateAt());
-        userModel.setUpdateAt(new Timestamp(System.currentTimeMillis()));
-        userDAO.update(userModel);
-        return userDAO.findById(userModel.getId());
+    public UserModel update(UserModel model) throws SQLException {
+        UserModel oldProduct = userDAO.findById(model.getId());
+        model.setCreateAt(oldProduct.getCreateAt());
+        model.setUpdateAt(new Timestamp(System.currentTimeMillis()));
+        userDAO.update(model);
+        return userDAO.findById(model.getId());
     }
 
     @Override

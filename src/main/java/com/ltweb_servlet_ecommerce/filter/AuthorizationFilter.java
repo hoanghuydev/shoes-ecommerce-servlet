@@ -1,6 +1,7 @@
 package com.ltweb_servlet_ecommerce.filter;
 
 import com.ltweb_servlet_ecommerce.model.UserModel;
+import com.ltweb_servlet_ecommerce.utils.SessionUtil;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -16,20 +17,19 @@ public class AuthorizationFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-//        HttpServletRequest req = (HttpServletRequest) servletRequest;
-//        HttpServletResponse resp = (HttpServletResponse) servletResponse;
-//        String url = req.getRequestURI();
-//        if (url.startsWith("/admin")) {
-//            UserModel user = (UserModel) SessionUtil.getInstance().getValue(req,"USERMODEL");
-//            if (user!=null) {
-//                if (user.getRoleId()==true) filterChain.doFilter(servletRequest,servletResponse);
-//                else resp.sendRedirect(req.getContextPath()+"/dang-nhap?action=login&message=not_permission&alert=danger");
-//
-//            } else {
-//                resp.sendRedirect(req.getContextPath()+"/dang-nhap?action=login&message=not_login_yet&alert=danger");
-//            }
-//        } else {
+        HttpServletRequest req = (HttpServletRequest) servletRequest;
+        HttpServletResponse resp = (HttpServletResponse) servletResponse;
+        String url = req.getRequestURI();
+        if (url.startsWith("/admin")) {
+            UserModel user = (UserModel) SessionUtil.getInstance().getValue(req,"USER_MODEL");
+            if (user!=null) {
+                if (user.getAdmin()==true) filterChain.doFilter(servletRequest,servletResponse);
+                else resp.sendRedirect(req.getContextPath()+"/sign-in?action=login&message=not_permission&toast=danger");
+            } else {
+                resp.sendRedirect(req.getContextPath()+"/sign-in?action=login&message=not_login_yet&toast=danger");
+            }
+        } else {
             filterChain.doFilter(servletRequest,servletResponse);
-//        }
+        }
     }
 }

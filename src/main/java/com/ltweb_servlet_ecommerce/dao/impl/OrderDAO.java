@@ -25,20 +25,29 @@ public class OrderDAO extends AbstractDAO<OrderModel> implements IOrderDAO {
         List<OrderModel> result =  query(sql,new OrderMapper(),params,OrderModel.class);
         return result.isEmpty() ? null : result.get(0);
     }
+    @Override
+    public OrderModel findWithFilter(OrderModel model) throws SQLException {
+        StringBuilder sqlStrBuilder = new StringBuilder("SELECT * FROM order WHERE 1=1 ");
+        MapSQLAndParamsResult sqlAndParams = new OrderMapper().mapSQLAndParams(sqlStrBuilder,model,"select");
+        String sql = sqlAndParams.getSql();
+        List<Object> params = sqlAndParams.getParams();
+        List<OrderModel> result = query(sql.toString(), new OrderMapper(),params,OrderModel.class);
+        return result.isEmpty() ? null : result.get(0);
+    }
 
     @Override
-    public Long save(OrderModel orderModel) throws SQLException {
+    public Long save(OrderModel model) throws SQLException {
         StringBuilder sqlStrBuilder = new StringBuilder("INSERT INTO order SET ");
-        MapSQLAndParamsResult sqlAndParams = new OrderMapper().mapSQLAndParams(sqlStrBuilder,orderModel,"insert");
+        MapSQLAndParamsResult sqlAndParams = new OrderMapper().mapSQLAndParams(sqlStrBuilder,model,"insert");
         String sql = sqlAndParams.getSql();
         List<Object> params = sqlAndParams.getParams();
         return insert(sql,params);
     }
 
     @Override
-    public void update(OrderModel orderModel) throws SQLException {
+    public void update(OrderModel model) throws SQLException {
         StringBuilder sqlStrBuilder = new StringBuilder("UPDATE order SET ");
-        MapSQLAndParamsResult sqlAndParams = new OrderMapper().mapSQLAndParams(sqlStrBuilder,orderModel,"update");
+        MapSQLAndParamsResult sqlAndParams = new OrderMapper().mapSQLAndParams(sqlStrBuilder,model,"update");
         String sql = sqlAndParams.getSql();
         List<Object> params = sqlAndParams.getParams();
         update(sql,params);

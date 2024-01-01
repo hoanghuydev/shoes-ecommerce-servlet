@@ -1,13 +1,13 @@
 package com.ltweb_servlet_ecommerce.model;
 
 public class SizeModel extends AbstractModel<SizeModel>{
-    private String sizeName;
+    private String name;
 
     public String getSizeName() {
-        return sizeName;
+        return name;
     }
 
     public void setSizeName(String sizeName) {
-        this.sizeName = sizeName;
+        this.name = sizeName;
     }
 }

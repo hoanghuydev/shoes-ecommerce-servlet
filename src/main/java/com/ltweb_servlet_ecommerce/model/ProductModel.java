@@ -4,12 +4,20 @@ public class ProductModel extends  AbstractModel<ProductModel> {
     private String title;
     private String content;
     private String shortDescription;
+    private String thumbnail;
     private Double price;
-    private Double rating;
     private String modelUrl;
     private String slug;
-
     private  Long categoryId;
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -40,14 +48,6 @@ public class ProductModel extends  AbstractModel<ProductModel> {
 
     public void setPrice(Double price) {
         this.price = price;
-    }
-
-    public Double getRating() {
-        return rating;
-    }
-
-    public void setRating(Double rating) {
-        this.rating = rating;
     }
 
     public String getModelUrl() {

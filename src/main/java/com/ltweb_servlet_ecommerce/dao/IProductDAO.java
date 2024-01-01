@@ -8,8 +8,9 @@ import java.util.List;
 public interface IProductDAO {
     List<ProductModel> findAll() throws SQLException;
     ProductModel findById(Long id) throws SQLException;
-    Long save(ProductModel productModel) throws SQLException;
-    void update(ProductModel productModel) throws SQLException;
+    ProductModel findWithFilter(ProductModel model) throws SQLException;
+    Long save(ProductModel model) throws SQLException;
+    void update(ProductModel model) throws SQLException;
     void delete(Long id) throws SQLException;
 
 }

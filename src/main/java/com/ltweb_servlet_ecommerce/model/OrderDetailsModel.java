@@ -1,6 +1,6 @@
 package com.ltweb_servlet_ecommerce.model;
 
-public class OrderDetails extends AbstractModel<OrderDetails>{
+public class OrderDetailsModel extends AbstractModel<OrderDetailsModel>{
     private Integer quantity;
     private Double subTotal;
     private Long orderId;

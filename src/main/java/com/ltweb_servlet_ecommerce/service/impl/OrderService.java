@@ -14,19 +14,23 @@ public class OrderService implements IOrderService {
     @Inject
     IOrderDAO orderDAO;
     @Override
-    public OrderModel update(OrderModel productModel) throws SQLException {
-        OrderModel oldProduct = orderDAO.findById(productModel.getId());
-        productModel.setCreateAt(oldProduct.getCreateAt());
-        productModel.setUpdateAt(new Timestamp(System.currentTimeMillis()));
-        orderDAO.update(productModel);
-        return orderDAO.findById(productModel.getId());
+    public OrderModel findWithFilter(OrderModel model) throws SQLException {
+        return orderDAO.findWithFilter(model);
+    }
+    @Override
+    public OrderModel update(OrderModel model) throws SQLException {
+        OrderModel oldProduct = orderDAO.findById(model.getId());
+        model.setCreateAt(oldProduct.getCreateAt());
+        model.setUpdateAt(new Timestamp(System.currentTimeMillis()));
+        orderDAO.update(model);
+        return orderDAO.findById(model.getId());
     }
 
     @Override
     public OrderModel delete(Long id) throws SQLException {
-        OrderModel oldProduct = orderDAO.findById(id);
+        OrderModel oldModel = orderDAO.findById(id);
         orderDAO.delete(id);
-        return null;
+        return oldModel;
     }
 
     @Override
@@ -40,8 +44,8 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public OrderModel save(OrderModel productModel) throws SQLException {
-        Long productId = orderDAO.save(productModel);
+    public OrderModel save(OrderModel model) throws SQLException {
+        Long productId = orderDAO.save(model);
         return orderDAO.findById(productId);
     }
 }

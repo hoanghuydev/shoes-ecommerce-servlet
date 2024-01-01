@@ -4,6 +4,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.ltweb_servlet_ecommerce.model.UserModel;
 import com.ltweb_servlet_ecommerce.service.IUserService;
 import com.ltweb_servlet_ecommerce.utils.FormUtil;
+import com.ltweb_servlet_ecommerce.utils.NotifyUtil;
 import com.ltweb_servlet_ecommerce.utils.SessionUtil;
 
 import javax.inject.Inject;
@@ -27,16 +28,9 @@ public class LoginController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     if (req.getRequestURI().startsWith("/sign-out")){
         SessionUtil.getInstance().removeValue(req,"USER_MODEL");
-        resp.sendRedirect(req.getContextPath()+"/home");
+        resp.sendRedirect(req.getContextPath()+"/home?message=logout_success&toast=success");
     } else {
-        String message = req.getParameter("message");
-        String toast = req.getParameter("toast");
-        if (message!=null && toast!=null) {
-            ResourceBundle resourceMsg = ResourceBundle.getBundle("message");
-            ResourceBundle resourceToast = ResourceBundle.getBundle("toast");
-            req.setAttribute("message",resourceMsg.getString(message));
-            req.setAttribute("toast",resourceToast.getString(toast));
-        }
+        NotifyUtil.setUp(req);
         RequestDispatcher rd = req.getRequestDispatcher("/views/shared/login.jsp");
         rd.forward(req, resp);
     }

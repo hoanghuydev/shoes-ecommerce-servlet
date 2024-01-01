@@ -2,6 +2,7 @@ package com.ltweb_servlet_ecommerce.service.impl;
 
 import com.ltweb_servlet_ecommerce.dao.IProductDAO;
 import com.ltweb_servlet_ecommerce.model.ProductModel;
+import com.ltweb_servlet_ecommerce.model.SizeModel;
 import com.ltweb_servlet_ecommerce.service.IProductService;
 
 import javax.inject.Inject;
@@ -12,6 +13,10 @@ import java.util.List;
 public class ProductService implements IProductService {
 @Inject
     IProductDAO productDAO;
+    @Override
+    public ProductModel findWithFilter(ProductModel model) throws SQLException {
+        return productDAO.findWithFilter(model);
+    }
     @Override
     public ProductModel update(ProductModel productModel) throws SQLException {
         ProductModel oldProduct = productDAO.findById(productModel.getId());
@@ -25,7 +30,7 @@ public class ProductService implements IProductService {
     public ProductModel delete(Long id) throws SQLException {
         ProductModel oldProduct = productDAO.findById(id);
         productDAO.delete(id);
-        return null;
+        return oldProduct;
     }
 
     @Override

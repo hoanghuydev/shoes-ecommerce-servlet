@@ -29,9 +29,9 @@ public class UserDAO extends AbstractDAO<UserModel> implements IUserDAO {
 
 
     @Override
-    public UserModel findWithFilter(UserModel userModel) throws SQLException {
-        StringBuilder sqlStrBuilder = new StringBuilder("SELECT * FROM user WHERE 1=1");
-        MapSQLAndParamsResult sqlAndParams = new UserMapper().mapSQLAndParams(sqlStrBuilder,userModel,"select");
+    public UserModel findWithFilter(UserModel model) throws SQLException {
+        StringBuilder sqlStrBuilder = new StringBuilder("SELECT * FROM user WHERE 1=1 ");
+        MapSQLAndParamsResult sqlAndParams = new UserMapper().mapSQLAndParams(sqlStrBuilder,model,"select");
         String sql = sqlAndParams.getSql();
         List<Object> params = sqlAndParams.getParams();
         List<UserModel> result = query(sql.toString(), new UserMapper(),params,UserModel.class);
@@ -39,9 +39,9 @@ public class UserDAO extends AbstractDAO<UserModel> implements IUserDAO {
     }
 
     @Override
-    public Long save(UserModel userModel) throws SQLException {
+    public Long save(UserModel model) throws SQLException {
         StringBuilder sqlStringBuilder = new StringBuilder("INSERT INTO user SET ");
-        MapSQLAndParamsResult sqlAndParams = new UserMapper().mapSQLAndParams(sqlStringBuilder,userModel,"insert");
+        MapSQLAndParamsResult sqlAndParams = new UserMapper().mapSQLAndParams(sqlStringBuilder,model,"insert");
         String sql = sqlAndParams.getSql();
         List<Object> params = sqlAndParams.getParams();
         return insert(sql,params);
@@ -56,9 +56,9 @@ public class UserDAO extends AbstractDAO<UserModel> implements IUserDAO {
     }
 
     @Override
-    public void update(UserModel userModel) throws SQLException {
+    public void update(UserModel model) throws SQLException {
         StringBuilder sqlStringBuilder = new StringBuilder("UPDATE user SET ");
-        MapSQLAndParamsResult sqlAndParams = new UserMapper().mapSQLAndParams(sqlStringBuilder,userModel,"update");
+        MapSQLAndParamsResult sqlAndParams = new UserMapper().mapSQLAndParams(sqlStringBuilder,model,"update");
         String sql = sqlAndParams.getSql();
         List<Object> params = sqlAndParams.getParams();
         update(sql,params);
